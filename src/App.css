@@ -1,0 +1,227 @@
+:root {
+  --t1: #2a78d6;
+  --track: #f0eff2;
+  --surface: #fcfcfb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --t1: #3987e5;
+    --track: #262833;
+    --surface: #1a1a19;
+  }
+}
+
+/* 대시보드는 템플릿 기본(1126px, 가운데 정렬)보다 넓게, 왼쪽 정렬로 */
+#root {
+  width: 1320px;
+  text-align: left;
+}
+
+main {
+  padding: 0 24px 48px;
+  @media (max-width: 640px) {
+    padding: 0 16px 32px;
+  }
+}
+
+main > h1 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 28px 0 4px;
+  @media (max-width: 640px) {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+}
+
+.status {
+  margin-top: 24px;
+}
+.status.error {
+  color: #d03b3b;
+}
+
+.board {
+  text-align: left;
+  font-size: 15px;
+}
+
+.board-empty {
+  margin-top: 24px;
+}
+
+.board-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.board-date {
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+/* 출국/입국 토글 */
+.segmented {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--track);
+
+  button {
+    font: inherit;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    padding: 4px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.active {
+    background: var(--bg);
+    color: var(--text-h);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+  button:focus-visible {
+    outline: 2px solid var(--t1);
+  }
+}
+
+/* 요약 카드 */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.stat-label {
+  font-size: 13px;
+}
+.stat-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 차트 영역: 데스크톱은 시간대 차트(넓게) + 구역별 차트를 나란히 */
+.charts {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+
+  @media (max-width: 960px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 차트 카드 */
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 16px 16px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .chart-fill {
+    flex: 1;
+  }
+  .hint {
+    font-size: 12px;
+  }
+  /* 차트 클릭 시 브라우저 기본 포커스 테두리 제거 */
+  .recharts-surface:focus,
+  .recharts-wrapper:focus {
+    outline: none;
+  }
+}
+
+.legend-text {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.tag {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.tag.now {
+  color: #fff;
+  background: var(--t1);
+}
+.tag.peak {
+  color: var(--text-h);
+  border: 1px solid var(--border);
+}
+
+/* 표 보기 */
+.table-view {
+  font-size: 14px;
+
+  summary {
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  th,
+  td {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: right;
+  }
+  th:first-child,
+  td:first-child {
+    text-align: left;
+  }
+  th {
+    color: var(--text-h);
+    font-weight: 500;
+  }
+}
